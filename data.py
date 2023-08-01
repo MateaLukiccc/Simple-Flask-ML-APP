@@ -32,6 +32,7 @@ def page_not_found(e):
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
    if request.method == 'POST':
+       print(request)
        # check if the post request has the file part
        if 'file' not in request.files:
            print("NO FILE")
