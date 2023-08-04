@@ -1,0 +1,4 @@
+detected/dog-1c640a28-323a-11ee-bdac-af1284e0a33b.jpg
+detected/bicycle-1c640a29-323a-11ee-bdac-af1284e0a33b.jpg
+detected/truck-1c640a2a-323a-11ee-bdac-af1284e0a33b.jpg
+object-detection.jpg
