@@ -26,7 +26,8 @@ def main(to_open_image, to_open_classes, weights, config):
     filename = to_open_classes
     classes = None
     image = cv2.imread(to_open_image)
-    arr = [image]
+    a = cv2.resize(image,(768, 576))
+    arr = [a]
     Width = image.shape[1]
     Height = image.shape[0]
     scale = 0.00392
@@ -84,24 +85,12 @@ def main(to_open_image, to_open_classes, weights, config):
         # extract objects
         crop_img = image[round(y):round(y)+round(h), round(x):round(x+w)]
         crop_img = cv2.resize(crop_img,(768, 576))
-        arr.append(crop_img)
-        #cv2.imshow(str(classes[class_ids[i]]), crop_img)
-        #outpath = f"detected/{classes[class_ids[i]]}-{uuid1()}.jpg"
-        # save the image
-        #cv2.imwrite(outpath,crop_img)
-        #cv2.waitKey(0)
-
+        arr.append(crop_img)    
     
-    #cv2.imshow("object detection", image)
-    #cv2.waitKey()
-        
-    #cv2.imwrite("object-detection.jpg", image)
-    arr.append(image)
+    a = cv2.resize(image,(768, 576))
+    arr.append(a)
     cv2.destroyAllWindows()
     
-    
-    
     collage = np.hstack(arr)
-    #cv2.imwrite(f"detected/{filename.lstrip('/home/lukic/Desktop/FaceDetection/Simple-Flask-ML-APP/uploaded')}.jpg", collage)
     return collage    
     
