@@ -10,11 +10,52 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" typr="text/css" href="../static/css/index.css">
     </head>
     <body>
-        <h1>Hello world</h1>
-        
-        <script src="" async defer></script>
+        <div class="main">
+            <div class="intro">
+                <div class="intro-text">
+                    <h1>Welcome back!</h1>
+                    <p class="sidekick-text">Start detecting objects using yolo algorithm</p>
+                    <button id="myButton" class="sign-up" >Go to upload page</button>
+                </div>
+                <div class="image">
+                    <p></p>
+                </div>
+            </div>
+            <div class="content">
+                <h2>Technologies used</h2>
+                <div class="cards">
+                    <div class="card">
+                        <div class="content-img">
+                            <img src="../static/images/flask.png" alt='no' />
+                        </div>
+                        <p>Flask</p>
+                    </div>
+                    <div class="card">
+                        <div class="content-img"><img src="../static/images/python.png" alt='no'/></div>
+                        <p>Python</p>
+                    </div>
+                    <div class="card">
+                        <div class="content-img"><img src="../static/images/opencv.svg" alt='no'/></div>
+                        <p>OpenCV</p>
+                    </div>
+                    <div class="card">
+                        <div class="content-img">
+                            <img src="../static/images/numpy.png" alt='no'/>
+                        </div>
+                        <p>NumPy</p>
+                    </div>
+                </div>
+            </div>
+        <footer>
+            <p>Copyright &copy; Faculty of Organizational Sciences 2023</p>
+        </footer>
+        <script type="text/javascript">
+            document.getElementById("myButton").onclick = function () {
+                location.href = "http://127.0.0.1:5000/uploader";
+            };
+        </script>
     </body>
 </html>
