@@ -1,46 +1,32 @@
-from flask import Flask, render_template, redirect, url_for, request, send_from_directory, flash, send_file
+from flask import Flask, render_template, redirect, url_for, request, send_file
 from werkzeug.utils import secure_filename
 import os
 from uuid import uuid1
 import sys
 import cv2
+from config import settings
 
 sys.path.insert(0, 'object-detection-opencv')
 
 from yolo_as_import import main
 
-UPLOAD_FOLDER = os.getcwd()+'/uploaded'
-ALLOWED_EXTENSIONS = {'jpg'}
+ALLOWED_EXTENSIONS = {'jpg', 'webp'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = settings.upload_folder
 
 
 def allowed_file(filename:str)->bool:
     print(filename.split('.')[-1].lower())
     return '.' in filename and filename.split('.')[-1].lower() in ALLOWED_EXTENSIONS
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
 @app.route('/index/')
 def redirect_to_index():
     return redirect(url_for('index'))
-
-
-@app.route('/user/<name>')
-@app.route('/user/')
-def user(name=None):
-    return render_template('user.html', name=name)
-
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('notFound.html'), 404
-	
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
@@ -81,7 +67,6 @@ def uploaded_file(filename):
 
 
 if __name__=="__main__":
-    print(type(os.getcwd()))
-    app.secret_key = 'super secret key'
+    app.secret_key = settings.secret_key
     app.run(debug=True)
     

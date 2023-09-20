@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
-from uuid import uuid1
-import os
+from config import settings
 
 def get_output_layers(net):
     
@@ -31,14 +30,14 @@ def main(to_open_image, all=True):
     Width = image.shape[1]
     Height = image.shape[0]
     scale = 0.00392
-    config= r"L:\Simple-Flask-ML-APP\object-detection-opencv\yolov3.cfg"
-    weights = r"L:\Simple-Flask-ML-APP\object-detection-opencv\yolov3.weights"
-    to_open_classes = r"L:\Simple-Flask-ML-APP\object-detection-opencv\yolov3.txt"
-    with open(to_open_classes, 'r') as f:
+    config_path= settings.config_path
+    weights_path = settings.weights_path
+    to_open_classes_path = settings.to_open_classes_path
+    with open(to_open_classes_path, 'r') as f:
         classes = [line.strip() for line in f.readlines()]
     
     COLORS = np.random.uniform(0, 255, size=(len(classes), 3))
-    net = cv2.dnn.readNet(weights, config)
+    net = cv2.dnn.readNet(weights_path, config_path)
 
     blob = cv2.dnn.blobFromImage(image, scale, (416,416), (0,0,0), True, crop=False)
 
@@ -92,6 +91,8 @@ def main(to_open_image, all=True):
                 pass
         draw_prediction(image, class_ids[i], confidences[i], round(x), round(y), round(x+w), round(y+h), COLORS, classes)    
     
+    if not all:
+        return image
     try:
         a = cv2.resize(image,(768, 576))
         arr.append(a)
